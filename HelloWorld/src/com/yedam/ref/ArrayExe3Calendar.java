@@ -43,6 +43,7 @@ public class ArrayExe3Calendar {
 		int month = 3;
 		int space = getFirstDay(month); //공백이 몇인지 알려주는 변수(1일이 언제부터 시작하는지 알려줌)
 		int lastDate = getLastDate(month); //마지막 날
+		int testDay = 21;
 		for (int i = 0; i < space; i++) {
 			System.out.print("    ");
 		}
@@ -52,13 +53,17 @@ public class ArrayExe3Calendar {
 			//String.valueOf(문자열).length() 10 이상의 두자릿수를 판별하기 위해 문자가 몇 자인지 알려주는...
 				System.out.print("   " + i);
 			} else if (String.valueOf(i).length() == 2) {
-				System.out.print("  " + i);
+				if(i == testDay) {
+					System.out.print(" 평가");
+				}else {
+					System.out.print("  " + i);
+				}
 			}
+			
 			//주 바꿈
 			if ((space + i) % 7 == 0) {
 				System.out.println();
 			}
-
 		}
 	}
 }
