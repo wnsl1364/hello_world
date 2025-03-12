@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class VarExe4 {
 	public static void main(String[] args) {
-		int[] scores = new int[3]; // {0, 0, 0} 배열의 크기가 3
+		int[] scores = new int[3]; // {0, 0, 0} 배열의 크기가 3, 선언과 동시에 크기 할당
 		//new 키워드 역할
 		//Heap 영역에 새로운 객체(또는 배열) 생성
 		//해당 객체(또는 배열)의 주소(참조값)를 반환하여 변수에 저장
@@ -23,7 +23,7 @@ public class VarExe4 {
 		double avg = 0.0;
 		
 		for (int i=0; i<scores.length; i++) {
-			sum = sum + scores[i];
+			sum += scores[i];
 		};
 		avg = sum * 1.0 / scores.length;
 		// 정수 나눗셈을 방지하고 실수 나눗셈을 수행하기 위해 sum * 1.0을 사용
