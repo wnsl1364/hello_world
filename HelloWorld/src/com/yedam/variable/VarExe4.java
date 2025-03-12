@@ -5,6 +5,9 @@ import java.util.Scanner;
 public class VarExe4 {
 	public static void main(String[] args) {
 		int[] scores = new int[3]; // {0, 0, 0} 배열의 크기가 3
+		//new 키워드 역할
+		//Heap 영역에 새로운 객체(또는 배열) 생성
+		//해당 객체(또는 배열)의 주소(참조값)를 반환하여 변수에 저장
 		
 		Scanner scn = new Scanner(System.in);
 		

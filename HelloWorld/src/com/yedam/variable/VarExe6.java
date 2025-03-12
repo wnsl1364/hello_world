@@ -29,8 +29,8 @@ public class VarExe6 {
 		Scanner scn = new Scanner(System.in);
 		
 		Member m1 = new Member(); //인스턴스 생성
-		m1.setName("홍길동");
-//		System.out.println(m1.score);
+		m1.setName("홍길동"); // setter.(값을 지정하는 메소드)
+//		System.out.println(m1.getScore());
 		
 		Member m2 = new Member(); //인스턴스 생성
 		m2.setName("한주연");
@@ -45,6 +45,7 @@ public class VarExe6 {
 		//70 ~ 100 사이의 임의의 값으로 점수 지정.
 		for(int i=0; i<members.length; i++) {
 //			members[i].score = ((int) (Math.random() * 31) + 70);
+			members[i].setScore((int) (Math.random() * 31) + 70);
 		}
 		
 		//조회이름을 입력 -> 접수출력.
