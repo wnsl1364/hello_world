@@ -58,8 +58,6 @@ public class VarExe6 {
 			}//equals 찾아보셈
 		};
 		
-		scn.close();
-		
 		// 점수가 가장 높은 사람의 이름.
 		int max = members[0].getScore();
 		String name = members[0].getName();
@@ -72,5 +70,6 @@ public class VarExe6 {
 
 		
 		System.out.println("최고점수는 " + max + ", 이름은 " + name);
+		scn.close();
 	}// end of main().
 }
