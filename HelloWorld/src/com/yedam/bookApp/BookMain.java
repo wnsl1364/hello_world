@@ -8,7 +8,7 @@ import java.util.Scanner;
 //쓰여진 해당 함수에서의 탈출 / 반복문을 포함하는 메서드 자체를 종료시킴
 //메서드의 리턴자료형이 void인 경우에는 return문이 필요없다
 
-//continue ans
+//continue 문
 //반복문을 완전히 빠져나가지 않고 반복문 내의 작업문을 건너뛸때 사용
 
 // 도서 등록, 수정, 삭제, 목록 관리
@@ -152,7 +152,8 @@ public class BookMain {
 		// 목록 출력
 		System.out.println("순번 | 제목            | 저자      | 가격");
 		System.out.println("========================================");
-		for (Book book : bookStore) {
+		Book[] list = searchList(null);
+		for (Book book : list) {
 			if (book != null) {
 				System.out.println(book.getOrderNo() + " | " + book.showList());
 			}
@@ -184,6 +185,20 @@ public class BookMain {
 		}
 	}
 	
+	//list와 publisher에서 활용할 공통 메소드
+	public static Book[] searchList(String keyword) {
+		Book[] list = new Book[100];
+		int idx = 0;
+		for(int i=0; i<bookStore.length; i++) {
+			if(bookStore[i] != null) {
+				if(keyword == null || bookStore[i].getCompany().equals(keyword)) {
+					list[idx++] = bookStore[i];
+				}
+			}
+		}
+		return list;
+	}
+	
 	//목록 조회(출판사)
 	public static void publisher() {
 		String company;
@@ -197,7 +212,8 @@ public class BookMain {
 		}
 		
 		check = false;
-		for(Book book : bookStore) {
+		Book[] list = searchList(company);
+		for(Book book : list) {
 			if(book != null && book.getCompany().equals(company)) {
 				System.out.println(book.getOrderNo() + " " + book.showList());
 				check = true;
@@ -215,6 +231,9 @@ public class BookMain {
 		bookStore[1] = new Book("스크립트기초", "박기초", "우리출", 26000, 2);
 		bookStore[2] = new Book("HTML,CSS", "김하늘", "가람출", 25000, 3);
 		bookStore[3] = new Book("이것이 자바다2", "신용권", "한빛출", 20000, 4);
+		bookStore[4] = new Book("스크립트기초", "박기초", "우리출", 26000, 5);
+		bookStore[5] = new Book("HTML,CSS", "김하늘", "가람출", 25000, 6);
+		bookStore[6] = new Book("이것이 자바다2", "신용권", "한빛출", 20000, 7);
 	}
 
 	// 메인 실행

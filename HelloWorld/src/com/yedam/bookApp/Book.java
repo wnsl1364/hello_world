@@ -22,10 +22,11 @@ public class Book {
 	}
 		
 	public Book(String title, String author, String company, int price, int orderNo) {
-		this.title = title;
-		this.author = author;
-		this.company = company;
-		this.price = price;
+//		this.title = title;
+//		this.author = author;
+//		this.company = company;
+//		this.price = price;
+		this(title, author, company, price); //this: 생성된 인스턴스
 		this.orderNo = orderNo;
 	}
 	
