@@ -13,19 +13,31 @@ import java.util.Scanner;
 
 // 도서 등록, 수정, 삭제, 목록 관리
 public class BookMain {
+	//싱글톤
+	//1.생성자 private 선언
+	private BookMain() {
+		
+	}
+	//2.정적 필드를 선언, 값 할당
+	private static BookMain instance = new BookMain();
+	
+	//3.getInstance() 제공
+	public static BookMain getInstance() {
+		return instance;
+	}
 
 	// 저장공간 (최대 100권)
 	//클래스 변수로 사용하기 위해서 static을 붙여줌
 	//static이 없으면 인스턴스 변수가 되어서 BookMain 객체를 만들때마다 bookStore배열이 새로 생성됨
 	//bookStore는 공통으로 사용하기때문에 static을 붙여서 모든 메서드에서 사용할 수 있게 만들어줌
 	
-	static Book[] bookStore = new Book[100]; //객체 배열을 선언하고 메모리를 할당
-	static Scanner scn = new Scanner(System.in);
-	static boolean check = false;
+	 Book[] bookStore = new Book[100]; //객체 배열을 선언하고 메모리를 할당
+	 Scanner scn = new Scanner(System.in);
+	 boolean check = false;
 
 	// 순번 생성 (가장 큰 orderNo + 1 반환)
 	//현재 저장된 책들 중에서 가장 큰 orderNum에 1을 더해 새로운 순번을 반환하게
-	public static int getSequenceNo() {
+	public  int getSequenceNo() {
 		int max = 0; //현재 가장 큰 orderNum 저장용
 		//향상된 for문(인덱스 사용 x)
 		//for(Type element : array){}
@@ -38,7 +50,7 @@ public class BookMain {
 	}
 
 	// 책 등록 (중복 제목 등록 불가)
-	public static void add() {
+	public  void add() {
 		System.out.print("책 제목을 입력하세요>> ");
 		String title = scn.nextLine();
 
@@ -68,7 +80,7 @@ public class BookMain {
 	}
 
 	// 책 수정 (제목으로 검색하여 가격 수정)
-	public static void edit() {
+	public  void edit() {
 		System.out.print("책 제목을 입력해주세요>> ");
 		String title = scn.nextLine();
 		if (title.isBlank()) {
@@ -95,7 +107,7 @@ public class BookMain {
 	}
 
 	// 책 삭제 (제목으로 검색하여 삭제)
-	public static void del() {
+	public  void del() {
 		String title;
 		while (true) {
 			System.out.print("책 제목을 입력해주세요>> ");
@@ -121,7 +133,7 @@ public class BookMain {
 	}
 
 	// 책 목록 조회 (순번 기준 정렬)
-	public static void list() {
+	public  void list() {
 		boolean noList = false;
 		for (Book book : bookStore) {
 			if (book != null) {
@@ -161,7 +173,7 @@ public class BookMain {
 	}
 
 	// 책 상세 조회 (제목으로 검색하여 정보 출력)
-	public static void detail() {
+	public  void detail() {
 		String title;
 		while (true) {
 			System.out.print("책 제목을 입력해주세요>> ");
@@ -186,7 +198,7 @@ public class BookMain {
 	}
 	
 	//list와 publisher에서 활용할 공통 메소드
-	public static Book[] searchList(String keyword) {
+	public  Book[] searchList(String keyword) {
 		Book[] list = new Book[100];
 		int idx = 0;
 		for(int i=0; i<bookStore.length; i++) {
@@ -200,7 +212,7 @@ public class BookMain {
 	}
 	
 	//목록 조회(출판사)
-	public static void publisher() {
+	public  void publisher() {
 		String company;
 		while(true) {
 			System.out.println("출판사를 입력해주세요>> ");
@@ -226,7 +238,7 @@ public class BookMain {
 	}
 
 	// 초기 데이터 설정
-	public static void init() {
+	public  void init() {
 		bookStore[0] = new Book("이것이 자바다", "신용권", "한빛출", 20000, 1);
 		bookStore[1] = new Book("스크립트기초", "박기초", "우리출", 26000, 2);
 		bookStore[2] = new Book("HTML,CSS", "김하늘", "가람출", 25000, 3);
@@ -237,7 +249,7 @@ public class BookMain {
 	}
 
 	// 메인 실행
-	public static void main(String[] args) {
+	public  void main(String[] args) {
 		init(); // 초기 데이터 설정
 
 		boolean run = true;

@@ -25,7 +25,7 @@ public class MethodExe2 {
 		return false;
 	}// End of add(Product prd)
 
-	// 상품이름, ALL
+	// 목록 상품이름, ALL
 	Product[] productList(Product prd) {
 		Product[] list = new Product[10];
 		int idx = 0;
