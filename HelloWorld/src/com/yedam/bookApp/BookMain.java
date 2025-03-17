@@ -34,7 +34,7 @@ public class BookMain {
 	}
 
 	// 로그인
-	public boolean login(String userId, String password) {
+	private boolean login(String userId, String password) {
 		for (User user : users) {
 			if (user != null && user.getUserId().equals(userId) && user.getPassword().equals(password)) {
 				System.out.println("로그인에 성공했습니다");
@@ -269,57 +269,69 @@ public class BookMain {
 
 	// 메인 실행
 	public void main(String[] args) {
-		init(); // 초기 데이터 설정
-
 		Scanner scn = new Scanner(System.in);
-		System.out.println("로그인 정보를 입력하세요.");
-		System.out.print("아이디: ");
-		String userId = scn.nextLine();
-		System.out.print("비밀번호: ");
-		String password = scn.nextLine();
-
-		if (login(userId, password)) {
-			boolean run = true;
-			while (run) {
-				System.out.println("\n1.도서등록  2.도서수정  3.도서삭제  4.도서목록  5.상세조회  6.목록조회(출판사) 9.종료");
-				System.out.print("선택>> ");
-				int menu;
-				try {
-					menu = Integer.parseInt(scn.nextLine());
-				} catch (NumberFormatException e) {
-					System.out.println("숫자를 입력해주세요.");
-					continue;
-				}
-
-				switch (menu) {
-				case 1:
-					add();
-					break;
-				case 2:
-					edit();
-					break;
-				case 3:
-					del();
-					break;
-				case 4:
-					list();
-					break;
-				case 5:
-					detail();
-					break;
-				case 6:
-					publisher();
-					break;
-				case 9:
-					System.out.println("프로그램이 종료됩니다.");
-					run = false;
-					break;
-				default:
-					System.out.println("잘못된 입력입니다. 다시 선택하세요.");
-				}
+		
+		//id. password 확인
+		while(true) {			
+			System.out.println("로그인 정보를 입력하세요.");
+			System.out.print("아이디: ");
+			String userId = scn.nextLine();
+			System.out.print("비밀번호: ");
+			String password = scn.nextLine();
+			
+			if(login(userId, password)) {
+				System.out.println("정상");
+				break;
 			}
-			System.out.println("End of program.");
+			System.out.println("아이디와 패스워드를 확인하세요.");
 		}
+		
+		
+		init(); // 초기 데이터 설정		
+
+		boolean run = true;
+		while (run) {
+			System.out.println("\n1.도서등록  2.도서수정  3.도서삭제  4.도서목록  5.상세조회  6.목록조회(출판사) 9.종료");
+			System.out.print("선택>> ");
+			
+			int menu;
+			//예외처리
+			try {
+				menu = Integer.parseInt(scn.nextLine());
+			} catch (NumberFormatException e) {
+				System.out.println("숫자를 입력해주세요.");
+				continue;
+			}
+
+			switch (menu) {
+			case 1:
+				add();
+				break;
+			case 2:
+				edit();
+				break;
+			case 3:
+				del();
+				break;
+			case 4:
+				list();
+				break;
+			case 5:
+				detail();
+				break;
+			case 6:
+				publisher();
+				break;
+			case 9:
+				System.out.println("프로그램이 종료됩니다.");
+				run = false;
+				break;
+			default:
+				System.out.println("잘못된 입력입니다. 다시 선택하세요.");
+			}
+		}
+		System.out.println("End of program.");
+		
 		scn.close();
 	}
 }
