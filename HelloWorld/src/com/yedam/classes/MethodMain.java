@@ -1,11 +1,11 @@
 package com.yedam.classes;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class MethodMain {
 	public static void main(String[] args) {
 		officeApp();
-
 	}
 
 	static void officeApp() {
@@ -24,10 +24,10 @@ public class MethodMain {
 			case 1://목록
 				Product prod = new Product();
 				prod.setProductName("ALL");
-				Product[] store = m2.productList(prod);
-				for(int i=0; i<store.length; i++) {
-					if(store[i] != null) {
-						System.out.println(store[i].showList());
+				List<Product> store = m2.productList(prod);
+				for(int i=0; i<store.size(); i++) {
+					if(store.get(i) != null) {
+						System.out.println(store.get(i).showList());
 					}
 					
 				}				
@@ -94,7 +94,6 @@ public class MethodMain {
 		}
 		System.out.println("프로그램이 종료되었습니다.");
 		scn.close();
-
 	}
 
 	void method2() {
@@ -118,11 +117,9 @@ public class MethodMain {
 		search.setProductName("지우개");
 		search.setPrice(700);
 
-		Product[] list = m2.productList(search);
-		for (int i = 0; i < list.length; i++) {
-			if (list[i] != null) {
-				System.out.println(list[i].showList());
-			}
+		List<Product> list = m2.productList(search);
+		for (int i = 0; i < list.size(); i++) {
+			System.out.println(list.get(i).showList());
 		}
 	}
 
