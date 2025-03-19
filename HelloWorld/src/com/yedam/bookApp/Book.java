@@ -9,7 +9,14 @@ public class Book {
 	private String company;
 	private int price;
 	private int orderNo; //1, 2, 3
+	private String bookCode;
 	
+	public String getBookCode() {
+		return bookCode;
+	}
+	public void setBookCode(String bookCode) {
+		this.bookCode = bookCode;
+	}
 	//생성자 정의
 	//기본 생성자
 	public Book() {}
