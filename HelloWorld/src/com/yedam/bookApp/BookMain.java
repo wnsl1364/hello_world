@@ -15,16 +15,16 @@ import java.util.Scanner;
 // 도서 등록, 수정, 삭제, 목록 관리
 public class BookMain {
 
-	private User[] users = new User[3];
+//	private User[] users = new User[3];
 
 	// 싱글톤
 	// 1.생성자 private 선언
 	// String userId, String userName, String password
-	private BookMain() {
-		users[0] = new User("user1", "한주연", "1235");
-		users[1] = new User("user2", "주만성", "9806");
-		users[2] = new User("user3", "고깜디", "1274");
-	}
+//	private BookMain() {
+//		users[0] = new User("user1", "한주연", "1235");
+//		users[1] = new User("user2", "주만성", "9806");
+//		users[2] = new User("user3", "고깜디", "1274");
+//	}
 
 	// 2.정적 필드를 선언, 값 할당
 	private static BookMain instance = new BookMain();
@@ -33,20 +33,23 @@ public class BookMain {
 	public static BookMain getInstance() {
 		return instance;
 	}
-	
-	//jdbc처리
+
+	// jdbc처리
 	BookJdbc dao = new BookJdbc();
 
 	// 로그인
-	private boolean login(String userId, String password) {
-		for (User user : users) {
-			if (user != null && user.getUserId().equals(userId) && user.getPassword().equals(password)) {
-				System.out.println("로그인에 성공했습니다");
-				return true;
-			}
-		}
-		System.out.println("로그인에 실패했습니다");
-		return false;
+	private User login(String id, String pw) {
+		MemberJdbc dao = new MemberJdbc();
+		return dao.login(id, pw);
+
+//		for (User user : users) {
+//			if (user != null && user.getUserId().equals(userId) && user.getPassword().equals(password)) {
+//				System.out.println("로그인에 성공했습니다");
+//				return true;
+//			}
+//		}
+//		System.out.println("로그인에 실패했습니다");
+//		return false;
 	}
 
 	// 저장공간 (최대 100권)
@@ -92,13 +95,13 @@ public class BookMain {
 		int price = Integer.parseInt(scn.nextLine());
 
 		Book bookRegi = new Book(title, author, company, price, getSequenceNo());
-		//배열에 추가 -> ojdbc변경
-		if(dao.insert(bookRegi)) {
+		// 배열에 추가 -> ojdbc변경
+		if (dao.insert(bookRegi)) {
 			System.out.println("정상등록");
-		}else {
+		} else {
 			System.out.println("등록예외");
 		}
-		
+
 	}
 
 	// 책 수정 (코드으로 검색하여 가격 수정)
@@ -113,16 +116,16 @@ public class BookMain {
 			return;
 		}
 
-		//update(파라미터)
+		// update(파라미터)
 		Book book = new Book();
 		book.setBookCode(bcode);
 		book.setTitle(title);
 		book.setPrice(price);
 		book.setAuthor(author);
-		
+
 		if (dao.update(book)) {
 			System.out.println("수정성공");
-		}else {
+		} else {
 			System.out.println("수정예외");
 		}
 	}
@@ -140,7 +143,7 @@ public class BookMain {
 
 		if (dao.delete(bcode)) {
 			System.out.println("삭제성공");
-		}else {
+		} else {
 			System.out.println("삭제예외");
 		}
 	}
@@ -152,15 +155,15 @@ public class BookMain {
 		System.out.println("순번 | 제목            | 저자      | 가격");
 		System.out.println("========================================");
 		List<Book> list = dao.list(null);
-		for(Book bk : list) {
+		for (Book bk : list) {
 			System.out.println(bk.showList());
-		}		
+		}
 	}
 
 	// 책 상세 조회 (제목으로 검색하여 정보 출력)
 	public void detail() {
 		String bcode = "";
-		
+
 		while (true) {
 			System.out.print("도서코드를 입력해주세요>> ");
 			bcode = scn.nextLine();
@@ -169,10 +172,10 @@ public class BookMain {
 			System.out.println("도서코드를 반드시 입력해주세요.");
 		}
 
-		Book book = dao.select(bcode); 
-		if(book != null) {			
+		Book book = dao.select(bcode);
+		if (book != null) {
 			System.out.println(book.showBookInfo());
-		}else {
+		} else {
 			System.out.println("조회결과 없습니다");
 		}
 	}
@@ -191,7 +194,7 @@ public class BookMain {
 //		return list;
 //	}
 
-	// 목록 조회(출판사)	
+	// 목록 조회(출판사)
 	public void publisher() {
 		System.out.print("출판사를 입력해주세요>> ");
 		String company = scn.nextLine();
@@ -200,9 +203,9 @@ public class BookMain {
 		System.out.println("순번 | 제목            | 저자      | 가격");
 		System.out.println("========================================");
 		List<Book> list = dao.list(company);
-		for(Book bk : list) {
+		for (Book bk : list) {
 			System.out.println(bk.showList());
-		}		
+		}
 	}
 
 //	// 초기 데이터 설정
@@ -215,40 +218,41 @@ public class BookMain {
 //		bookStore[5] = new Book("HTML,CSS", "김하늘", "가람출", 25000, 6);
 //		bookStore[6] = new Book("이것이 자바다2", "신용권", "한빛출", 20000, 7);
 //	}
-	
-	private Book searchBook(String bcode) {
-		return dao.select(bcode); //조회결과가 없을 경우에는 null을 반환
-	}
+
+//	private Book searchBook(String bcode) {
+//		return dao.select(bcode); // 조회결과가 없을 경우에는 null을 반환
+//	}
 
 	// 메인 실행
 	public void main(String[] args) {
 		Scanner scn = new Scanner(System.in);
-		
-		//id. password 확인
-		while(true) {			
+
+		// id. password 확인
+		while (true) {
 			System.out.println("로그인 정보를 입력하세요.");
 			System.out.print("아이디: ");
-			String userId = scn.nextLine();
+			String id = scn.nextLine();
 			System.out.print("비밀번호: ");
-			String password = scn.nextLine();
-			
-			if(login(userId, password)) {
-				System.out.println("정상");
+			String pw = scn.nextLine();
+
+			//User 클래스, Map 컬렉션.
+			User user = login(id, pw);
+			if (user != null) {
+				System.out.println(user.getUserName() + "님 환영합니다.");
 				break;
 			}
 			System.out.println("아이디와 패스워드를 확인하세요.");
 		}
-		
-		
+
 //		init(); // 초기 데이터 설정		
 
 		boolean run = true;
 		while (run) {
 			System.out.println("\n1.도서등록  2.도서수정  3.도서삭제  4.도서목록  5.상세조회  6.목록조회(출판사) 9.종료");
 			System.out.print("선택>> ");
-			
+
 			int menu;
-			//예외처리
+			// 예외처리
 			try {
 				menu = Integer.parseInt(scn.nextLine());
 			} catch (NumberFormatException e) {
@@ -284,7 +288,7 @@ public class BookMain {
 			}
 		}
 		System.out.println("End of program.");
-		
+
 		scn.close();
 	}
 }

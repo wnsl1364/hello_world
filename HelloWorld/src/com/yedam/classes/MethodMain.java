@@ -28,8 +28,7 @@ public class MethodMain {
 				for(int i=0; i<store.size(); i++) {
 					if(store.get(i) != null) {
 						System.out.println(store.get(i).showList());
-					}
-					
+					}					
 				}				
 				break;
 			case 2://추가
@@ -66,7 +65,7 @@ public class MethodMain {
 				prod.setPrice(price);
 				m2.modify(prod);
 				
-				if(m2.add(prod)) {
+				if(m2.modify(prod)) {
 					System.out.println("상품의 정보가 수정되었습니다.");
 				}else{
 					System.out.println("상품의 정보수정이 되지않았습니다.");
@@ -77,18 +76,16 @@ public class MethodMain {
 				System.out.println("삭제할 상품의 코드를 입력해주세요.");
 				code = scn.nextLine();
 				
-				prod = new Product();
-				prod.setProductCode(code);
-				m2.remove(code);
-				
-				if(m2.add(prod)) {
+				if(m2.remove(code)) {
 					System.out.println("상품이 삭제되었습니다.");
 				}else{
 					System.out.println("상품이 삭제되지않았습니다.");
 				};
 				break;
-			default:
+			case 9 :
+				m2.save();
 				run = false;
+			default:
 				break;
 			}
 		}

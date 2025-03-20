@@ -1,7 +1,17 @@
 package com.yedam.classes;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
 
 public class MethodExe2 {
 	// 필드
@@ -9,12 +19,60 @@ public class MethodExe2 {
 
 	// 생성자 : 필드의 값을 초기화
 	MethodExe2() {
+		init();
+	}
+
+	void init() {
 		store = new ArrayList<Product>(); // new Product[10];
-		store.add(new Product("A001", "지우개", 500));
-		store.add(new Product("B001", "샤프", 1000));
-		store.add(new Product("C001", "연필", 800));
-		store.add(new Product("D001", "지우개", 1000));
-		store.add(new Product("E001", "지우개", 2000));
+//		try {
+//			Scanner scn = new Scanner(new FileInputStream("c:/temp/message.txt"));
+//			while (true) {
+//				String msg = scn.nextLine();
+//				String[] msgAry = msg.split(" ");
+//				store.add(new Product(msgAry[0], msgAry[1], Integer.parseInt(msgAry[2])));
+//			}
+//		} catch (FileNotFoundException e) {
+//			e.printStackTrace();
+//		} catch (NoSuchElementException e) {
+//
+//		} // 초기화 끝
+		
+		try {
+			FileInputStream fis = new FileInputStream("c:/temp/object.dat");
+			ObjectInputStream ois = new ObjectInputStream(fis);
+			store = (List<Product>) ois.readObject();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	// 종료시점에 store 정보를 message.txt에 저장.
+	void save() {
+		// 입력값을 파일출력
+//		try {
+//			Writer writer = new FileWriter("c:/temp/message.txt");
+//			for (Product prd : store) {
+//				String msg = prd.getProductCode() + " " + prd.getProductName() + " " + prd.getPrice();
+//				writer.write(msg + "\n");
+//				writer.flush();
+//			}
+//			writer.close();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+		
+
+		try {
+			FileOutputStream fos = new FileOutputStream("c:/temp/object.dat");
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			
+			oos.writeObject(store);
+			oos.flush();
+			oos.close();
+			fos.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	// 메소드
