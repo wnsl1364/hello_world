@@ -2,8 +2,9 @@ package com.yedam;
 
 import java.util.Scanner;
 
-public class myPractice {
+public class myPractice2 {
 	public static void main(String[] args) {
+		/*두 개의 정수를 입력받아 합을 출력하는 프로그램*/
 		Scanner scn = new Scanner(System.in);
 		
 		while(true) {
