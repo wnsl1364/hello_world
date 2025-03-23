@@ -10,40 +10,39 @@ package com.yedam.inheritance;
 //친구
 public class FriendExe {
 	public static void main(String[] args) {
-		// 업캐스팅
-		Friend[] friends = new Friend[10];
-		
-		//instance
-		Friend f1 = new Friend();
-		f1.setName("한주연");
-		f1.setTel("0101-9209-1235");
-//		System.out.println(f1.toString());
-		
-		UnivFriend f2 = new UnivFriend();	
-		f2.setName("주만성");
-		f2.setTel("010-6316-2148");
-		f2.setUnivName("우리학교");
-		f2.setMajor("호텔관광학과");
-//		System.out.println(f2.toString());
-		
-		CompanyFriend f3 = new CompanyFriend();	
-		f3.setName("한찬우");
-		f3.setTel("010-6000-0000");
-		f3.setCompany("동아일보");
-		f3.setDept("경제부");
-//		System.out.println(f3.toString());
-		
-		//부모 클래스의 변수에 자식 인스턴스 대입 가능
-		friends[0] = f1;
-		friends[1] = f2;
-		friends[2] = f3;
-		
-		//Friend[] => toString()
-		for(int i=0; i<friends.length; i++) {
-			if(friends[i] != null) {
-				System.out.println(friends[i].toString());
-			}
-		}	
+		// 업캐스팅: 부모 클래스 타입의 배열로 자식 객체를 참조
+        Friend[] friends = new Friend[10];
+
+        // Friend 객체 생성
+        Friend f1 = new Friend();
+        f1.setName("한주연");
+        f1.setTel("0101-9209-1235");
+
+        // UnivFriend 객체 생성
+        UnivFriend f2 = new UnivFriend();
+        f2.setName("주만성");
+        f2.setTel("010-6316-2148");
+        f2.setUnivName("우리학교");
+        f2.setMajor("호텔관광학과");
+
+        // CompanyFriend 객체 생성
+        CompanyFriend f3 = new CompanyFriend();
+        f3.setName("한찬우");
+        f3.setTel("010-6000-0000");
+        f3.setCompany("동아일보");
+        f3.setDept("경제부");
+
+        // 부모 클래스 배열에 자식 객체들을 추가
+        friends[0] = f1;
+        friends[1] = f2;
+        friends[2] = f3;
+
+        // 배열의 모든 Friend 객체에 대해 toString() 출력
+        for (int i = 0; i < friends.length; i++) {
+            if (friends[i] != null) {
+                System.out.println(friends[i].toString());
+            }
+        }	
 		
 		//형변환
 		int num = 20;

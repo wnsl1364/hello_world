@@ -2,13 +2,14 @@ package com.yedam.inheritance;
 
 public class AnimalExe {
 	public static void main(String[] args) {
-		// 부모 타입(Animal)으로 자식 객체(Bird)를 참조 (업캐스팅)
+		// 새 객체를 부모 클래스 타입으로 참조 (업캐스팅)
 		Animal animal = new Bird();
+		animal.sound();  // "짹짹" 출력 (Bird 클래스에서 오버라이딩된 메서드 호출)
+		animal.eat();    // "먹는다." 출력 (부모 클래스에서 상속받은 메서드 호출)
 
-		// 오버라이딩된 메서드가 실행됨 (다형성)
-		animal.sound(); // "짹짹" 출력
-
-		// 부모 클래스의 일반 메서드 실행
-		animal.eat(); // "먹는다." 출력
+		// 물고기 객체를 부모 클래스 타입으로 참조 (업캐스팅)
+		animal = new Fish();
+		animal.sound();  // "뻐끔뻐끔" 출력 (Fish 클래스에서 오버라이딩된 메서드 호출)
+		animal.eat();    // "먹는다." 출력 (부모 클래스에서 상속받은 메서드 호출)
 	}
 }
